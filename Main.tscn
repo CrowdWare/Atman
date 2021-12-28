@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://pf-adamant-sans-pro/PF Adamant Sans Pro Black Italic.ttf" type="DynamicFontData" id=1]
 
@@ -66,20 +66,30 @@ func startBreathing():
 	$StartButton.visible = false
 	$StopButton.visible = true
 	$Animation.visible = true
+	$Description.visible = false
+	$Breath.visible = true
+	$Breath.text = \"OUT\"
 	phase = BREATHING_OUT
 	count = 0
 	$AnimationPlayer.play(\"BreathOut\")
-	$Message.text = \"Let the animation guide your breath\"
+	$Message.text = \"Let the animation guide your breath (breath in and out for 30 times or tab for next step)\"
 
 func _on_StopButton_pressed():
-	if phase == BREATHING_IN or phase == BREATHING_OUT:
+	if phase == BREATHING_IN:
+		$Breath.text = \"OUT\"
+		phase = HOLDING_OUT
+		count = 0
+		startTime = OS.get_unix_time()
+		$AnimationPlayer.play(\"BreathOut\")
+	elif phase == BREATHING_OUT:
 		holdBreath(HOLDING_OUT)
 	elif phase == HOLDING_OUT:
 		startTime = OS.get_unix_time()
 		$Animation.visible = true
 		phase = HOLDING_IN
+		$Breath.text = \"IN\"
 		$AnimationPlayer.play(\"BreathIn\")
-		$Message.text = \"Breath in and hold breath for 15 seconds\"
+		$Message.text = \"Breath in and hold breath for 15 seconds (tab for next step)\"
 	elif phase == HOLDING_IN:
 		startBreathing()
 
@@ -90,11 +100,15 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 			holdBreath(HOLDING_OUT)
 		if phase == BREATHING_OUT:
 			phase = BREATHING_IN
+			$Breath.text = \"IN\"
 			$AnimationPlayer.play(\"BreathIn\")
 	elif anim_name == \"BreathIn\":
 		if phase == BREATHING_IN:
 			phase = BREATHING_OUT
+			$Breath.text = \"OUT\"
 			$AnimationPlayer.play(\"BreathOut\")
+		elif phase == HOLDING_IN:
+			$Breath.text = \"HOLD\"
 		
 func holdBreath(mode):
 	$Animation.visible = false
@@ -102,8 +116,9 @@ func holdBreath(mode):
 	$StartButton.visible = false
 	startTime = OS.get_unix_time()
 	seconds = 0
-	$Message.text = \"Breath out and hold your breath as long as you feel good\"
+	$Message.text = \"Breath out and hold your breath as long as you feel good (tab for next step)\"
 	phase = mode
+	$Breath.text = \"HOLD\"
 "
 
 [sub_resource type="StyleBoxFlat" id=7]
@@ -180,6 +195,14 @@ tracks/1/keys = {
 "values": [ Color( 0.054902, 0.847059, 0.0705882, 1 ), Color( 0.933333, 0.717647, 0.0666667, 0.262745 ) ]
 }
 
+[sub_resource type="DynamicFont" id=14]
+size = 40
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=13]
+size = 33
+font_data = ExtResource( 1 )
+
 [sub_resource type="DynamicFont" id=4]
 size = 47
 font_data = ExtResource( 1 )
@@ -231,9 +254,26 @@ margin_left = 80.0
 margin_top = 860.0
 margin_right = 640.0
 margin_bottom = 1060.0
-custom_colors/font_color = Color( 0.0784314, 0.137255, 0.933333, 1 )
-custom_fonts/font = SubResource( 4 )
+custom_colors/font_color = Color( 0.0666667, 0.0666667, 0.0705882, 1 )
+custom_fonts/font = SubResource( 14 )
 text = "Tap to start"
+align = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Description" type="Label" parent="."]
+margin_left = 80.0
+margin_top = 180.0
+margin_right = 640.0
+margin_bottom = 473.0
+custom_colors/font_color = Color( 0.231373, 0.235294, 0.254902, 1 )
+custom_fonts/font = SubResource( 13 )
+text = "Atman is a Sanskrit word that refers to the Self or self-existent essence of human beings.
+It's also similar to the German word: Atmen (breathing)
+
+This app is based on the Wim Hof method."
 align = 1
 autowrap = true
 __meta__ = {
@@ -252,11 +292,25 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Breath" type="Label" parent="."]
+visible = false
+margin_top = 420.0
+margin_right = 720.0
+margin_bottom = 468.0
+custom_colors/font_color = Color( 0.0784314, 0.137255, 0.933333, 1 )
+custom_fonts/font = SubResource( 4 )
+text = "OUT"
+align = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Caption" type="Label" parent="."]
 margin_left = 20.0
-margin_top = 40.0
+margin_top = 80.0
 margin_right = 700.0
-margin_bottom = 120.0
+margin_bottom = 160.0
 custom_colors/font_color = Color( 0.0352941, 0.180392, 0.952941, 1 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 custom_colors/font_color_shadow = Color( 0.223529, 0.219608, 0.219608, 1 )
