@@ -27,7 +27,7 @@
      inkscape:document-units="px"
      showgrid="false"
      inkscape:zoom="0.5"
-     inkscape:cx="532"
+     inkscape:cx="968"
      inkscape:cy="843"
      inkscape:window-width="1848"
      inkscape:window-height="1016"
@@ -81,6 +81,50 @@
          stdDeviation="0.98826929"
          id="feGaussianBlur952" />
     </filter>
+    <filter
+       id="e-7"
+       color-interpolation-filters="sRGB"
+       x="-0.011790249"
+       y="-0.012217117"
+       width="1.0235805"
+       height="1.0244342">
+      <feGaussianBlur
+         stdDeviation="0.95064289"
+         id="feGaussianBlur943-5" />
+    </filter>
+    <filter
+       id="f-3"
+       color-interpolation-filters="sRGB"
+       x="-0.011998666"
+       y="-0.012001294"
+       width="1.0239973"
+       height="1.0240026">
+      <feGaussianBlur
+         stdDeviation="1.5065625"
+         id="feGaussianBlur946-5" />
+    </filter>
+    <filter
+       id="g-6"
+       color-interpolation-filters="sRGB"
+       x="-0.011999608"
+       y="-0.01200076"
+       width="1.0239992"
+       height="1.0240015">
+      <feGaussianBlur
+         stdDeviation="1.5110156"
+         id="feGaussianBlur949-2" />
+    </filter>
+    <filter
+       id="h-9"
+       color-interpolation-filters="sRGB"
+       x="-0.011634709"
+       y="-0.012388859"
+       width="1.0232694"
+       height="1.0247777">
+      <feGaussianBlur
+         stdDeviation="0.98826929"
+         id="feGaussianBlur952-1" />
+    </filter>
   </defs>
   <g
      inkscape:label="Ebene 1"
@@ -102,7 +146,10 @@
        x="148.08658"
        y="541.29596"
        id="text18484"
-       transform="scale(1.0776563,0.92793966)"><tspan
+       transform="scale(1.0776563,0.92793966)"
+       inkscape:export-filename="/home/art/SourceCode/Atman/caption.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
          sodipodi:role="line"
          id="tspan18482"
          x="148.08658"
