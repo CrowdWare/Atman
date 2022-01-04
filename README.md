@@ -1,7 +1,7 @@
 # ATMAN
-Atman is a small app for Android to help doing a breathing ritual based on the Win Hoff Method.
+Atman is a small app for Android to help doing a breathing ritual based on the Wim Hoff Method.
 
-![](screen.png) 
+![](atman.png) 
 
 ## Installation
 Just download the .APK file on your Android phone and execute it.   
